@@ -12,35 +12,41 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProxyController = void 0;
+exports.TransformController = void 0;
 const common_1 = require("@nestjs/common");
-const proxy_service_1 = require("./proxy.service");
-let ProxyController = class ProxyController {
-    constructor(proxyService) {
-        this.proxyService = proxyService;
+const transform_service_1 = require("./transform.service");
+let TransformController = class TransformController {
+    constructor(transformService) {
+        this.transformService = transformService;
     }
-    async fetchData(url) {
+    async fetchData(url, options = '', target = '', res) {
         if (!url) {
             throw new common_1.BadRequestException('URL is required');
         }
-        try {
-            return await this.proxyService.fetchDataFromUrl(url);
+        const value = await this.transformService.parserValue({
+            url,
+            options,
+            target,
+        });
+        if (!value) {
+            return;
         }
-        catch (error) {
-            throw new Error(`Error fetching data: ${error.message}`);
-        }
+        return res.redirect(value);
     }
 };
-exports.ProxyController = ProxyController;
+exports.TransformController = TransformController;
 __decorate([
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)('url')),
+    __param(1, (0, common_1.Query)('options')),
+    __param(2, (0, common_1.Query)('target')),
+    __param(3, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String, String, Object]),
     __metadata("design:returntype", Promise)
-], ProxyController.prototype, "fetchData", null);
-exports.ProxyController = ProxyController = __decorate([
-    (0, common_1.Controller)('proxy'),
-    __metadata("design:paramtypes", [proxy_service_1.ProxyService])
-], ProxyController);
-//# sourceMappingURL=proxy.controller.js.map
+], TransformController.prototype, "fetchData", null);
+exports.TransformController = TransformController = __decorate([
+    (0, common_1.Controller)('transform'),
+    __metadata("design:paramtypes", [transform_service_1.TransformService])
+], TransformController);
+//# sourceMappingURL=transform.controller.js.map
