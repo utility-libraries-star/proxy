@@ -29,7 +29,6 @@ export class TransformService {
       `https://listen.klove.com/api/location?ip=${currentIp}`,
     );
     const currentLocation = responseLocation.data;
-		console.log(currentLocation)
 
     const response = await axios.post(
       url,
