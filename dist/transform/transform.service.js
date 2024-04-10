@@ -15,7 +15,15 @@ const HEADER = {
 let TransformService = class TransformService {
     async parserValue({ url, options, target }) {
         const currentOptions = JSON.parse(decodeURIComponent(options) || '');
-        const response = await axios_1.default.post(url, currentOptions, {
+        const responseIp = await axios_1.default.get('https://api.ipify.org/?format=json');
+        const currentIp = responseIp.data.ip;
+        if (!currentIp) {
+            return;
+        }
+        const responseLocation = await axios_1.default.get(`https://listen.klove.com/api/location?ip=${currentIp}`);
+        const currentLocation = responseLocation.data;
+        console.log(currentLocation);
+        const response = await axios_1.default.post(url, { ...currentOptions, ...currentLocation }, {
             headers: HEADER,
         });
         const responseData = response.data;
