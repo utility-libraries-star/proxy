@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Gilroy-ExtraBold';
+  font-style: normal;
+  font-weight: 800;
+  src: url('https://files.elfsightcdn.com/10f57fcd-29bb-4da4-9c09-61ea49a5bf6e/3474fd5a-70c1-418b-a506-112e23d6d5ea/gilroy-extrabold.eot')
+      format('embedded-opentype'),
+    url('https://files.elfsightcdn.com/10f57fcd-29bb-4da4-9c09-61ea49a5bf6e/279c91c6-2073-47cf-bc79-6b5c08c0baf3/gilroy-extrabold.woff2')
+      format('woff2'),
+    url('https://files.elfsightcdn.com/10f57fcd-29bb-4da4-9c09-61ea49a5bf6e/8946a4e6-9e8f-482b-b3f4-69509beec45d/gilroy-extrabold.woff')
+      format('woff'),
+    url('https://files.elfsightcdn.com/10f57fcd-29bb-4da4-9c09-61ea49a5bf6e/36cd1c4d-2d48-4c52-ba48-468395a3e768/gilroy-extrabold.ttf')
+      format('truetype');
+}
