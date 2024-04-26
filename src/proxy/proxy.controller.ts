@@ -25,6 +25,7 @@ export class ProxyController {
       const response = await axios.get(url, {
         responseType: 'stream',
         headers: HEADERS,
+        transformResponse: [],
       });
 
       Object.entries({
@@ -33,6 +34,11 @@ export class ProxyController {
       }).forEach(([key, value]) => {
         res.setHeader(key, value);
       });
+
+      const transferEncoding = response.headers['transfer-encoding'];
+      if (transferEncoding && transferEncoding === 'chunked') {
+        res.setHeader('Transfer-Encoding', 'chunked');
+      }
 
       response.data.pipe(res);
     } catch (error) {
