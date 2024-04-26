@@ -13,48 +13,35 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProxyController = void 0;
+const http_proxy_middleware_1 = require("http-proxy-middleware");
 const common_1 = require("@nestjs/common");
-const axios_1 = require("axios");
-const HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-};
+const proxy = (0, http_proxy_middleware_1.createProxyMiddleware)({
+    router: (req) => {
+        return req.query.url;
+    },
+    onProxyReq: (proxyReq, req) => {
+        const url = new URL(req.query.url);
+        proxyReq.setHeader('host', url.host);
+        proxyReq.setHeader('origin', url.origin);
+    },
+    ignorePath: true,
+    changeOrigin: true,
+});
 let ProxyController = class ProxyController {
-    async proxyRequest(url, res) {
-        if (!url) {
-            throw new common_1.BadRequestException('URL is required');
-        }
-        try {
-            const response = await axios_1.default.get(url, {
-                responseType: 'stream',
-                headers: HEADERS,
-                transformResponse: [],
-            });
-            Object.entries({
-                ...HEADERS,
-                'Content-Type': response.headers['content-type'] || 'text/html',
-            }).forEach(([key, value]) => {
-                res.setHeader(key, value);
-            });
-            const transferEncoding = response.headers['transfer-encoding'];
-            if (transferEncoding && transferEncoding === 'chunked') {
-                res.setHeader('Transfer-Encoding', 'chunked');
-            }
-            response.data.pipe(res);
-        }
-        catch (error) {
-            res.status(error.response.status).send(error.response.statusText);
-        }
+    get(req, res, next) {
+        proxy(req, res, next);
     }
 };
 exports.ProxyController = ProxyController;
 __decorate([
-    (0, common_1.Get)(),
-    __param(0, (0, common_1.Query)('url')),
+    (0, common_1.All)(),
+    __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Next)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
-    __metadata("design:returntype", Promise)
-], ProxyController.prototype, "proxyRequest", null);
+    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:returntype", void 0)
+], ProxyController.prototype, "get", null);
 exports.ProxyController = ProxyController = __decorate([
     (0, common_1.Controller)('proxy')
 ], ProxyController);

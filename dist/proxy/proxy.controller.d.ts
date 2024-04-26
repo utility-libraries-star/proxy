@@ -1,4 +1,3 @@
-import { Response } from 'express';
 export declare class ProxyController {
-    proxyRequest(url: string, res: Response): Promise<void>;
+    get(req: any, res: any, next: any): void;
 }
