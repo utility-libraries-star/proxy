@@ -14,8 +14,7 @@ const mock_rest_api_controller_1 = require("./mock-rest-api/mock-rest-api.contro
 const mock_rest_api_service_1 = require("./mock-rest-api/mock-rest-api.service");
 const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
-const transform_controller_1 = require("./transform/transform.controller");
-const transform_service_1 = require("./transform/transform.service");
+const proxy_controller_1 = require("./proxy/proxy.controller");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -26,8 +25,8 @@ exports.AppModule = AppModule = __decorate([
                 rootPath: (0, path_1.join)(__dirname, '..', 'public'),
             }),
         ],
-        controllers: [format_controller_1.FormatController, mock_rest_api_controller_1.MockRestApiController, transform_controller_1.TransformController],
-        providers: [format_service_1.FormatService, mock_rest_api_service_1.MockRestApiService, transform_service_1.TransformService],
+        controllers: [format_controller_1.FormatController, mock_rest_api_controller_1.MockRestApiController, proxy_controller_1.ProxyController],
+        providers: [format_service_1.FormatService, mock_rest_api_service_1.MockRestApiService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

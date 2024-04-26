@@ -12,41 +12,41 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TransformController = void 0;
+exports.ProxyController = void 0;
 const common_1 = require("@nestjs/common");
-const transform_service_1 = require("./transform.service");
-let TransformController = class TransformController {
-    constructor(transformService) {
-        this.transformService = transformService;
-    }
-    async fetchData(url, options = '', target = '', res) {
+const axios_1 = require("axios");
+let ProxyController = class ProxyController {
+    async proxyRequest(url, res) {
         if (!url) {
             throw new common_1.BadRequestException('URL is required');
         }
-        const value = await this.transformService.parserValue({
-            url,
-            options,
-            target,
-        });
-        if (!value) {
-            return;
+        try {
+            const response = await axios_1.default.get(url, {
+                responseType: 'stream',
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+                },
+            });
+            if (response.headers['content-type']) {
+                res.setHeader('Content-Type', response.headers['content-type']);
+            }
+            response.data.pipe(res);
         }
-        return res.redirect(value);
+        catch (error) {
+            res.status(error.response.status).send(error.response.statusText);
+        }
     }
 };
-exports.TransformController = TransformController;
+exports.ProxyController = ProxyController;
 __decorate([
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)('url')),
-    __param(1, (0, common_1.Query)('options')),
-    __param(2, (0, common_1.Query)('target')),
-    __param(3, (0, common_1.Res)()),
+    __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String, Object]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
-], TransformController.prototype, "fetchData", null);
-exports.TransformController = TransformController = __decorate([
-    (0, common_1.Controller)('transform'),
-    __metadata("design:paramtypes", [transform_service_1.TransformService])
-], TransformController);
-//# sourceMappingURL=transform.controller.js.map
+], ProxyController.prototype, "proxyRequest", null);
+exports.ProxyController = ProxyController = __decorate([
+    (0, common_1.Controller)('proxy')
+], ProxyController);
+//# sourceMappingURL=proxy.controller.js.map

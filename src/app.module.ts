@@ -5,8 +5,7 @@ import { MockRestApiController } from './mock-rest-api/mock-rest-api.controller'
 import { MockRestApiService } from './mock-rest-api/mock-rest-api.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { TransformController } from './transform/transform.controller';
-import { TransformService } from './transform/transform.service';
+import { ProxyController } from './proxy/proxy.controller';
 
 @Module({
   imports: [
@@ -14,7 +13,7 @@ import { TransformService } from './transform/transform.service';
       rootPath: join(__dirname, '..', 'public'),
     }),
   ],
-  controllers: [FormatController, MockRestApiController, TransformController],
-  providers: [FormatService, MockRestApiService, TransformService],
+  controllers: [FormatController, MockRestApiController, ProxyController],
+  providers: [FormatService, MockRestApiService],
 })
 export class AppModule {}
