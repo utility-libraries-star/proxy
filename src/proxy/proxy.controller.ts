@@ -8,6 +8,11 @@ import {
 import axios from 'axios';
 import { Response } from 'express';
 
+const HEADERS = {
+  'User-Agent':
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+};
+
 @Controller('proxy')
 export class ProxyController {
   @Get()
@@ -19,15 +24,15 @@ export class ProxyController {
     try {
       const response = await axios.get(url, {
         responseType: 'stream',
-        headers: {
-          'User-Agent':
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-        },
+        headers: HEADERS,
       });
 
-      if (response.headers['content-type']) {
-        res.setHeader('Content-Type', response.headers['content-type']);
-      }
+      Object.entries({
+        ...HEADERS,
+        'Content-Type': response.headers['content-type'] || 'text/html',
+      }).forEach(([key, value]) => {
+        res.setHeader(key, value);
+      });
 
       response.data.pipe(res);
     } catch (error) {

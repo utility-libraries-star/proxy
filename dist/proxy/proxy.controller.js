@@ -15,6 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProxyController = void 0;
 const common_1 = require("@nestjs/common");
 const axios_1 = require("axios");
+const HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+};
 let ProxyController = class ProxyController {
     async proxyRequest(url, res) {
         if (!url) {
@@ -23,13 +26,14 @@ let ProxyController = class ProxyController {
         try {
             const response = await axios_1.default.get(url, {
                 responseType: 'stream',
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-                },
+                headers: HEADERS,
             });
-            if (response.headers['content-type']) {
-                res.setHeader('Content-Type', response.headers['content-type']);
-            }
+            Object.entries({
+                ...HEADERS,
+                'Content-Type': response.headers['content-type'] || 'text/html',
+            }).forEach(([key, value]) => {
+                res.setHeader(key, value);
+            });
             response.data.pipe(res);
         }
         catch (error) {
