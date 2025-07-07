@@ -7,6 +7,12 @@ import { MockRestApiController } from './mock-rest-api/mock-rest-api.controller'
 import { MockRestApiService } from './mock-rest-api/mock-rest-api.service';
 import { ProxyController } from './proxy/proxy.controller';
 import { WidgetModule } from './widget/widget.module';
+import { OpenGraphModule } from './opengraph/opengraph.module';
+import { OpenGraphController } from './opengraph/opengraph.controller';
+import { OpenGraphService } from './opengraph/opengraph.service';
+import { RssParserModule } from './rss-parser/rss-parser.module';
+import { RssParserController } from './rss-parser/rss-parser.controller';
+import { RssParserService } from './rss-parser/rss-parser.service';
 
 @Module({
   imports: [
@@ -14,8 +20,21 @@ import { WidgetModule } from './widget/widget.module';
       rootPath: join(__dirname, '..', 'public'),
     }),
     WidgetModule,
+    OpenGraphModule,
+    RssParserModule,
   ],
-  controllers: [FormatController, MockRestApiController, ProxyController],
-  providers: [FormatService, MockRestApiService],
+  controllers: [
+    OpenGraphController,
+    FormatController,
+    MockRestApiController,
+    ProxyController,
+    RssParserController,
+  ],
+  providers: [
+    FormatService,
+    MockRestApiService,
+    OpenGraphService,
+    RssParserService,
+  ],
 })
 export class AppModule {}
