@@ -14,7 +14,6 @@ const format_controller_1 = require("./format/format.controller");
 const format_service_1 = require("./format/format.service");
 const mock_rest_api_controller_1 = require("./mock-rest-api/mock-rest-api.controller");
 const mock_rest_api_service_1 = require("./mock-rest-api/mock-rest-api.service");
-const proxy_controller_1 = require("./proxy/proxy.controller");
 const widget_module_1 = require("./widget/widget.module");
 const opengraph_module_1 = require("./opengraph/opengraph.module");
 const opengraph_controller_1 = require("./opengraph/opengraph.controller");
@@ -22,6 +21,7 @@ const opengraph_service_1 = require("./opengraph/opengraph.service");
 const rss_parser_module_1 = require("./rss-parser/rss-parser.module");
 const rss_parser_controller_1 = require("./rss-parser/rss-parser.controller");
 const rss_parser_service_1 = require("./rss-parser/rss-parser.service");
+const proxy_module_1 = require("./proxy/proxy.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -34,12 +34,12 @@ exports.AppModule = AppModule = __decorate([
             widget_module_1.WidgetModule,
             opengraph_module_1.OpenGraphModule,
             rss_parser_module_1.RssParserModule,
+            proxy_module_1.ProxyModule,
         ],
         controllers: [
             opengraph_controller_1.OpenGraphController,
             format_controller_1.FormatController,
             mock_rest_api_controller_1.MockRestApiController,
-            proxy_controller_1.ProxyController,
             rss_parser_controller_1.RssParserController,
         ],
         providers: [

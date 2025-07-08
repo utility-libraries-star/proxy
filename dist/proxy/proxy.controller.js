@@ -13,36 +13,40 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProxyController = void 0;
-const http_proxy_middleware_1 = require("http-proxy-middleware");
 const common_1 = require("@nestjs/common");
-const proxy = (0, http_proxy_middleware_1.createProxyMiddleware)({
-    router: (req) => {
-        return req.query.url;
-    },
-    onProxyReq: (proxyReq, req) => {
-        const url = new URL(req.query.url);
-        proxyReq.setHeader('host', url.host);
-        proxyReq.setHeader('origin', url.origin);
-    },
-    ignorePath: true,
-    changeOrigin: true,
-});
+const proxy_service_1 = require("./proxy.service");
 let ProxyController = class ProxyController {
-    get(req, res, next) {
-        proxy(req, res, next);
+    constructor(proxyService) {
+        this.proxyService = proxyService;
+    }
+    async proxy(url, clearCache, res) {
+        if (!url) {
+            return res.status(400).json({ error: 'Missing url parameter' });
+        }
+        try {
+            const { data, contentType } = await this.proxyService.fetchWithCache(url, clearCache === '1');
+            console.log(data);
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Content-Type', contentType || 'text/plain');
+            res.send(data);
+        }
+        catch (err) {
+            res.status(500).json({ error: err.message });
+        }
     }
 };
 exports.ProxyController = ProxyController;
 __decorate([
-    (0, common_1.All)(),
-    __param(0, (0, common_1.Req)()),
-    __param(1, (0, common_1.Res)()),
-    __param(2, (0, common_1.Next)()),
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('url')),
+    __param(1, (0, common_1.Query)('clear_cache')),
+    __param(2, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, Object]),
-    __metadata("design:returntype", void 0)
-], ProxyController.prototype, "get", null);
+    __metadata("design:paramtypes", [String, String, Object]),
+    __metadata("design:returntype", Promise)
+], ProxyController.prototype, "proxy", null);
 exports.ProxyController = ProxyController = __decorate([
-    (0, common_1.Controller)('proxy')
+    (0, common_1.Controller)('proxy'),
+    __metadata("design:paramtypes", [proxy_service_1.ProxyService])
 ], ProxyController);
 //# sourceMappingURL=proxy.controller.js.map
