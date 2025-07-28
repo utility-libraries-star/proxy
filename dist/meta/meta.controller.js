@@ -21,7 +21,9 @@ let MetaController = class MetaController {
     }
     async create(body, req) {
         const data = await this.service.create(body);
-        const baseUrl = `${req.protocol}://${req.get('host')}`;
+        const forwardedProto = req.headers['x-forwarded-proto'] || req.protocol || 'http';
+        const host = req.get('host');
+        const baseUrl = `${forwardedProto}://${host}`;
         return { link: `${baseUrl}/p/${data.id}` };
     }
     async preview(id, res, req) {
@@ -34,7 +36,7 @@ let MetaController = class MetaController {
           <meta property="og:title" content="${data.title}" />
           <meta property="og:description" content="${data.description}" />
           <meta property="og:image" content="${data.image}" />
-          <meta property="og:url" content="${req.protocol}://${req.get('host')}${req.originalUrl}" />
+          <meta property="og:url" content="${data.url}" />
           <meta http-equiv="refresh" content="0; url=${data.redirect}" />
         </head>
         <body>

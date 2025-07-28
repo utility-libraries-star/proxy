@@ -19,7 +19,11 @@ export class MetaController {
   async create(@Body() body: any, @Req() req: Request) {
     const data = await this.service.create(body);
 
-    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    const forwardedProto =
+      req.headers['x-forwarded-proto'] || req.protocol || 'http';
+    const host = req.get('host');
+    const baseUrl = `${forwardedProto}://${host}`;
+
     return { link: `${baseUrl}/p/${data.id}` };
   }
 
