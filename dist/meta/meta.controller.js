@@ -37,7 +37,7 @@ let MetaController = class MetaController {
           <meta property="og:description" content="${data.description}" />
           <meta property="og:image" content="${data.image}" />
           <meta property="og:url" content="${data.url}" />
-          <meta http-equiv="refresh" content="0; url=${data.redirect}" />
+
         </head>
         <body>
           <p>Redirecting...</p>

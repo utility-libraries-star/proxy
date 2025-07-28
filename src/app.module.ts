@@ -19,27 +19,18 @@ import { ProxyModule } from './proxy/proxy.module';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
-    // TypeOrmModule.forRoot({
-    //   type: 'sqlite',
-    //   database: 'db.sqlite',
-    //   entities: [Meta],
-    //   synchronize: true,
-    // }),
-    // TypeOrmModule.forFeature([Meta]),
     WidgetModule,
     OpenGraphModule,
     RssParserModule,
     ProxyModule,
   ],
   controllers: [
-    //MetaController,
     OpenGraphController,
     FormatController,
     MockRestApiController,
     RssParserController,
   ],
   providers: [
-    //MetaService,
     FormatService,
     MockRestApiService,
     OpenGraphService,
