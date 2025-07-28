@@ -13,26 +13,37 @@ import { RssParserModule } from './rss-parser/rss-parser.module';
 import { RssParserController } from './rss-parser/rss-parser.controller';
 import { RssParserService } from './rss-parser/rss-parser.service';
 import { ProxyModule } from './proxy/proxy.module';
-import { ProxyService } from './proxy/proxy.service';
-import { ProxyController } from './proxy/proxy.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Meta } from './meta/meta.entity';
+import { MetaController } from './meta/meta.controller';
+import { MetaService } from './meta/meta.service';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: 'db.sqlite',
+      entities: [Meta],
+      synchronize: true,
+    }),
+    TypeOrmModule.forFeature([Meta]),
     WidgetModule,
     OpenGraphModule,
     RssParserModule,
     ProxyModule,
   ],
   controllers: [
+    MetaController,
     OpenGraphController,
     FormatController,
     MockRestApiController,
     RssParserController,
   ],
   providers: [
+    MetaService,
     FormatService,
     MockRestApiService,
     OpenGraphService,

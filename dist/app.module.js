@@ -22,6 +22,10 @@ const rss_parser_module_1 = require("./rss-parser/rss-parser.module");
 const rss_parser_controller_1 = require("./rss-parser/rss-parser.controller");
 const rss_parser_service_1 = require("./rss-parser/rss-parser.service");
 const proxy_module_1 = require("./proxy/proxy.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const meta_entity_1 = require("./meta/meta.entity");
+const meta_controller_1 = require("./meta/meta.controller");
+const meta_service_1 = require("./meta/meta.service");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -31,18 +35,27 @@ exports.AppModule = AppModule = __decorate([
             serve_static_1.ServeStaticModule.forRoot({
                 rootPath: (0, path_1.join)(__dirname, '..', 'public'),
             }),
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'sqlite',
+                database: 'db.sqlite',
+                entities: [meta_entity_1.Meta],
+                synchronize: true,
+            }),
+            typeorm_1.TypeOrmModule.forFeature([meta_entity_1.Meta]),
             widget_module_1.WidgetModule,
             opengraph_module_1.OpenGraphModule,
             rss_parser_module_1.RssParserModule,
             proxy_module_1.ProxyModule,
         ],
         controllers: [
+            meta_controller_1.MetaController,
             opengraph_controller_1.OpenGraphController,
             format_controller_1.FormatController,
             mock_rest_api_controller_1.MockRestApiController,
             rss_parser_controller_1.RssParserController,
         ],
         providers: [
+            meta_service_1.MetaService,
             format_service_1.FormatService,
             mock_rest_api_service_1.MockRestApiService,
             opengraph_service_1.OpenGraphService,

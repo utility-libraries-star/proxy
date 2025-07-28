@@ -1,0 +1,10 @@
+import { MetaService } from './meta.service';
+import { Response, Request } from 'express';
+export declare class MetaController {
+    private service;
+    constructor(service: MetaService);
+    create(body: any, req: Request): Promise<{
+        link: string;
+    }>;
+    preview(id: string, res: Response, req: Request): Promise<void>;
+}
