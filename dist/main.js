@@ -6,7 +6,9 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule, {
         logger: ['error', 'warn'],
     });
-    await app.listen(3000);
+    await app.listen(process.env.PORT || 3000);
+    return app.getHttpServer();
 }
-bootstrap();
+const server = bootstrap();
+exports.default = server;
 //# sourceMappingURL=main.js.map
