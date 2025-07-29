@@ -48,14 +48,14 @@ import { ConfigModule } from '@nestjs/config';
     ProxyModule
   ],
   controllers: [
-    //MetaController,
+    MetaController,
     OpenGraphController,
     FormatController,
     MockRestApiController,
     RssParserController
   ],
   providers: [
-    //MetaService,
+    MetaService,
     FormatService,
     MockRestApiService,
     OpenGraphService,

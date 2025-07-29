@@ -24,6 +24,8 @@ const rss_parser_service_1 = require("./rss-parser/rss-parser.service");
 const proxy_module_1 = require("./proxy/proxy.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const meta_entity_1 = require("./meta/meta.entity");
+const meta_controller_1 = require("./meta/meta.controller");
+const meta_service_1 = require("./meta/meta.service");
 const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
@@ -58,12 +60,14 @@ exports.AppModule = AppModule = __decorate([
             proxy_module_1.ProxyModule
         ],
         controllers: [
+            meta_controller_1.MetaController,
             opengraph_controller_1.OpenGraphController,
             format_controller_1.FormatController,
             mock_rest_api_controller_1.MockRestApiController,
             rss_parser_controller_1.RssParserController
         ],
         providers: [
+            meta_service_1.MetaService,
             format_service_1.FormatService,
             mock_rest_api_service_1.MockRestApiService,
             opengraph_service_1.OpenGraphService,
