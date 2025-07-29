@@ -79,9 +79,9 @@ let RssParserService = class RssParserService {
                 language: channel?.language || '',
                 generator: channel?.generator || '',
                 image: channel?.image || {},
-                items,
+                items
             },
-            paging: { cursor: items.length },
+            paging: { cursor: items.length }
         };
     }
 };

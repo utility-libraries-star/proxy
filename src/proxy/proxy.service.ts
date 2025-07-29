@@ -10,12 +10,12 @@ export class ProxyService {
 
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
-    private httpService: HttpService,
+    private httpService: HttpService
   ) {}
 
   async fetchWithCache(
     url: string,
-    clearCache: boolean,
+    clearCache: boolean
   ): Promise<{ data: string; contentType?: string }> {
     const cacheKey = `proxy:${url}`;
 
@@ -32,12 +32,12 @@ export class ProxyService {
 
     this.logger.debug(`Fetching fresh data from ${url}`);
     const response = await lastValueFrom(
-      this.httpService.get(url, { responseType: 'text' }),
+      this.httpService.get(url, { responseType: 'text' })
     );
 
     const result = {
       data: response.data,
-      contentType: response.headers['content-type'],
+      contentType: response.headers['content-type']
     };
 
     await this.cacheManager.set(cacheKey, result, 3600);

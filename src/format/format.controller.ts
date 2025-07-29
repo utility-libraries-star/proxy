@@ -3,7 +3,7 @@ import {
   Controller,
   Get,
   Header,
-  Query,
+  Query
 } from '@nestjs/common';
 import { FormatService } from './format.service';
 import axios from 'axios';
@@ -41,7 +41,7 @@ export class FormatController {
             : this.formatterService.getValue(responseData, value);
 
           formattedData[key] = String(formattedValue);
-        },
+        }
       );
 
       return formattedData;

@@ -19,11 +19,11 @@ exports.OpenGraphModule = OpenGraphModule = __decorate([
         imports: [
             cache_manager_1.CacheModule.register({
                 ttl: 7200,
-                isGlobal: true,
-            }),
+                isGlobal: true
+            })
         ],
         controllers: [opengraph_controller_1.OpenGraphController],
-        providers: [opengraph_service_1.OpenGraphService],
+        providers: [opengraph_service_1.OpenGraphService]
     })
 ], OpenGraphModule);
 //# sourceMappingURL=opengraph.module.js.map

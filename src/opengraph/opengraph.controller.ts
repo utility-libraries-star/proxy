@@ -8,7 +8,7 @@ export class OpenGraphController {
   @Get()
   async getOpenGraph(
     @Query('url') url: string,
-    @Query('clear_cache') clearCache?: string,
+    @Query('clear_cache') clearCache?: string
   ) {
     if (!url) {
       throw new BadRequestException('Missing "url" parameter');

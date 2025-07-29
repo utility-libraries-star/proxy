@@ -39,7 +39,7 @@ export class RssParserService {
     await this.cacheManager.set(
       metaKey,
       { updatedAt: Date.now() },
-      TTL_SECONDS,
+      TTL_SECONDS
     );
 
     return fresh;
@@ -48,7 +48,7 @@ export class RssParserService {
   private async refreshInBackground(
     url: string,
     cacheKey: string,
-    metaKey: string,
+    metaKey: string
   ) {
     this.getFreshRss(url)
       .then(async (fresh) => {
@@ -56,7 +56,7 @@ export class RssParserService {
         await this.cacheManager.set(
           metaKey,
           { updatedAt: Date.now() },
-          TTL_SECONDS,
+          TTL_SECONDS
         );
         console.log(`[rss] Updated in background: ${url}`);
       })
@@ -94,9 +94,9 @@ export class RssParserService {
         language: channel?.language || '',
         generator: channel?.generator || '',
         image: channel?.image || {},
-        items,
+        items
       },
-      paging: { cursor: items.length },
+      paging: { cursor: items.length }
     };
   }
 }
