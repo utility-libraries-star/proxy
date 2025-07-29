@@ -16,7 +16,6 @@ import {ServeStaticModule} from "@nestjs/serve-static";
 import {join} from "path";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Meta} from "./meta/meta.entity";
-import * as process from "node:process";
 
 @Module({
     imports: [

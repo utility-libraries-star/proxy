@@ -25,7 +25,6 @@ const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
 const typeorm_1 = require("@nestjs/typeorm");
 const meta_entity_1 = require("./meta/meta.entity");
-const process = require("node:process");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
