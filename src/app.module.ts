@@ -25,7 +25,8 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public')
+      rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/static'
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
