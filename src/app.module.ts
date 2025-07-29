@@ -14,6 +14,8 @@ import { ProxyModule } from './proxy/proxy.module';
 import {ConfigModule} from "@nestjs/config";
 import {ServeStaticModule} from "@nestjs/serve-static";
 import {join} from "path";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {Meta} from "./meta/meta.entity";
 
 @Module({
   imports: [
@@ -24,20 +26,20 @@ import {join} from "path";
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/static',
     }),
-    // TypeOrmModule.forRoot({
-    //   type: 'mysql',
-    //   host: process.env.MYSQL_HOST,
-    //   port: +process.env.MYSQL_PORT,
-    //   username: process.env.MYSQL_USER,
-    //   password: process.env.MYSQL_PASSWORD,
-    //   database: process.env.MYSQL_DB,
-    //   entities: [Meta],
-    //   synchronize: true,
-    //   ssl: {
-    //     rejectUnauthorized: false,
-    //   },
-    // }),
-    // TypeOrmModule.forFeature([Meta]),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.MYSQL_HOST,
+      port: +process.env.MYSQL_PORT,
+      username: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DB,
+      entities: [Meta],
+      synchronize: true,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    }),
+    TypeOrmModule.forFeature([Meta]),
     WidgetModule,
     OpenGraphModule,
     RssParserModule,
