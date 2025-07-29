@@ -39,14 +39,19 @@ export class MetaController {
     const html = `
           <html lang="en">
             <head>
+              <title>${data.title}</title>
               <meta property="og:title" content="${data.title}" />
               <meta property="og:description" content="${data.description}" />
               <meta property="og:image" content="${data.image}" />
               <meta property="og:url" content="${req.protocol}://${req.get('host')}${req.originalUrl}" />
-              <meta http-equiv="refresh" content="0; url=${data.redirect}" />
             </head>
             <body>
               <p>Redirecting...</p>
+              <script>
+                setTimeout(() => {
+                  window.location.href = "${data.redirect}";
+                }, 100);
+              </script>
             </body>
           </html>
         `;
