@@ -1,2 +1,2 @@
-import { Handler } from 'aws-lambda';
-export declare const handler: Handler;
+declare const expressApp: import("express-serve-static-core").Express;
+export default expressApp;
