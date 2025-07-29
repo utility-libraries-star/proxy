@@ -11,8 +11,6 @@ import { RssParserModule } from './rss-parser/rss-parser.module';
 import { RssParserController } from './rss-parser/rss-parser.controller';
 import { RssParserService } from './rss-parser/rss-parser.service';
 import { ProxyModule } from './proxy/proxy.module';
-import { MetaController } from './meta/meta.controller';
-import { MetaService } from './meta/meta.service';
 
 @Module({
   imports: [
@@ -43,14 +41,14 @@ import { MetaService } from './meta/meta.service';
     ProxyModule,
   ],
   controllers: [
-    MetaController,
+    //MetaController,
     OpenGraphController,
     FormatController,
     MockRestApiController,
     RssParserController,
   ],
   providers: [
-    MetaService,
+   // MetaService,
     FormatService,
     MockRestApiService,
     OpenGraphService,
