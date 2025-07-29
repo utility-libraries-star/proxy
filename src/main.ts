@@ -1,24 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { createServer } from 'http';
 
-let server: any;
+let appInstance;
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { bodyParser: false });
-  await app.init();
-  const instance = app.getHttpAdapter().getInstance();
-  server = createServer(instance);
-  return server;
-}
-
-if (require.main === module) {
-  bootstrap().then((srv) => srv.listen(3000));
-}
-
-export default async function handler(req: any, res: any) {
-  if (!server) {
-    server = await bootstrap();
+export default async function handler(req, res) {
+  if (!appInstance) {
+    const app = await NestFactory.create(AppModule);
+    await app.init();
+    appInstance = app.getHttpAdapter().getInstance(); // express
   }
-  server.emit('request', req, res);
+
+  return appInstance(req, res);
 }
