@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MetaController = void 0;
 const common_1 = require("@nestjs/common");
 const meta_service_1 = require("./meta.service");
+const client_1 = require("@prisma/client");
 let MetaController = class MetaController {
     constructor(service) {
         this.service = service;
@@ -27,28 +28,29 @@ let MetaController = class MetaController {
         return { link: `${baseUrl}/p/${data.id}` };
     }
     async preview(id, res, req) {
-        const data = await this.service.findById(id);
+        const data = await this.service.getById(id);
         if (!data)
             throw new common_1.NotFoundException();
+        const ogUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
         const html = `
-          <html lang="en">
-            <head>
-              <title>${data.title}</title>
-              <meta property="og:title" content="${data.title}" />
-              <meta property="og:description" content="${data.description}" />
-              <meta property="og:image" content="${data.image}" />
-              <meta property="og:url" content="${req.protocol}://${req.get('host')}${req.originalUrl}" />
-            </head>
-            <body>
-              <p>Redirecting...</p>
-              <script>
-                setTimeout(() => {
-                  window.location.href = "${data.redirect}";
-                }, 100);
-              </script>
-            </body>
-          </html>
-        `;
+      <html lang="en">
+        <head>
+          <title>${escapeHtml(data.title)}</title>
+          <meta property="og:title" content="${escapeHtml(data.title)}" />
+          <meta property="og:description" content="${escapeHtml(data.description)}" />
+          <meta property="og:image" content="${escapeHtml(data.image)}" />
+          <meta property="og:url" content="${escapeHtml(ogUrl)}" />
+        </head>
+        <body>
+          <p>Redirecting...</p>
+          <script>
+            setTimeout(() => {
+              window.location.href = "${escapeJs(data.redirect)}";
+            }, 100);
+          </script>
+        </body>
+      </html>
+    `;
         res.setHeader('Content-Type', 'text/html');
         res.send(html);
     }
@@ -75,4 +77,19 @@ exports.MetaController = MetaController = __decorate([
     (0, common_1.Controller)('p'),
     __metadata("design:paramtypes", [meta_service_1.MetaService])
 ], MetaController);
+function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, (m) => {
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;',
+        };
+        return map[m] || m;
+    });
+}
+function escapeJs(str) {
+    return str.replace(/"/g, '\\"');
+}
 //# sourceMappingURL=meta.controller.js.map

@@ -8,31 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MetaService = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
-const typeorm_2 = require("typeorm");
-const meta_entity_1 = require("./meta.entity");
+const prisma_service_1 = require("../prisma/prisma.service");
 let MetaService = class MetaService {
-    constructor(repo) {
-        this.repo = repo;
+    constructor(prisma) {
+        this.prisma = prisma;
     }
-    async create(data) {
-        const entity = this.repo.create(data);
-        return this.repo.save(entity);
+    create(data) {
+        return this.prisma.meta.create({ data });
     }
-    async findById(id) {
-        return this.repo.findOne({ where: { id } });
+    getById(id) {
+        return this.prisma.meta.findUnique({ where: { id } });
     }
 };
 exports.MetaService = MetaService;
 exports.MetaService = MetaService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(meta_entity_1.Meta)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], MetaService);
 //# sourceMappingURL=meta.service.js.map
