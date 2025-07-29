@@ -16,7 +16,7 @@ const fs_1 = require("fs");
 const path_1 = require("path");
 let PrismaService = class PrismaService extends client_1.PrismaClient {
     constructor() {
-        const certContent = process.env.SSL_CERT.replace(/\\n/g, '\n');
+        const certContent = process.env.SSL.replace(/\\n/g, '\n');
         if (certContent) {
             const certPath = (0, path_1.join)('/tmp', 'ca.pem');
             (0, fs_1.writeFileSync)(certPath, certContent, 'utf-8');
