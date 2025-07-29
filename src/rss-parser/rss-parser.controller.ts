@@ -8,7 +8,7 @@ export class RssParserController {
   @Get()
   async getRss(
     @Query('q') url: string,
-    @Query('clear_cache') clearCache?: string
+    @Query('clear_cache') clearCache?: string,
   ) {
     if (!url) {
       return { error: 'Missing required parameter: q (RSS URL)' };

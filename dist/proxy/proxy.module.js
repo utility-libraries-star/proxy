@@ -20,12 +20,12 @@ exports.ProxyModule = ProxyModule = __decorate([
         imports: [
             cache_manager_1.CacheModule.register({
                 ttl: 60 * 60,
-                isGlobal: true
+                isGlobal: true,
             }),
-            axios_1.HttpModule
+            axios_1.HttpModule,
         ],
         controllers: [proxy_controller_1.ProxyController],
-        providers: [proxy_service_1.ProxyService]
+        providers: [proxy_service_1.ProxyService],
     })
 ], ProxyModule);
 //# sourceMappingURL=proxy.module.js.map

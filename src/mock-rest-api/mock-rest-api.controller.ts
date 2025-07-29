@@ -3,7 +3,7 @@ import {
   Controller,
   Get,
   Header,
-  Query
+  Query,
 } from '@nestjs/common';
 import { MockRestApiService } from './mock-rest-api.service';
 

@@ -19,8 +19,8 @@ let MockRestApiService = class MockRestApiService {
                 dashboard: 'https://example.com/dashboard/john',
                 options: {
                     setting1: true,
-                    setting2: false
-                }
+                    setting2: false,
+                },
             },
             {
                 id: 2,
@@ -30,8 +30,8 @@ let MockRestApiService = class MockRestApiService {
                 dashboard: '',
                 options: {
                     setting1: false,
-                    setting2: true
-                }
+                    setting2: true,
+                },
             },
             {
                 id: 3,
@@ -41,8 +41,8 @@ let MockRestApiService = class MockRestApiService {
                 dashboard: 'https://example.com/dashboard/alice',
                 options: {
                     setting1: true,
-                    setting2: true
-                }
+                    setting2: true,
+                },
             },
             {
                 id: 4,
@@ -52,8 +52,8 @@ let MockRestApiService = class MockRestApiService {
                 dashboard: '',
                 options: {
                     setting1: false,
-                    setting2: false
-                }
+                    setting2: false,
+                },
             },
             {
                 id: 5,
@@ -63,8 +63,8 @@ let MockRestApiService = class MockRestApiService {
                 dashboard: 'https://example.com/dashboard/emily',
                 options: {
                     setting1: true,
-                    setting2: false
-                }
+                    setting2: false,
+                },
             },
             {
                 id: 6,
@@ -74,8 +74,8 @@ let MockRestApiService = class MockRestApiService {
                 dashboard: 'https://example.com/dashboard/michael',
                 options: {
                     setting1: true,
-                    setting2: true
-                }
+                    setting2: true,
+                },
             },
             {
                 id: 7,
@@ -85,8 +85,8 @@ let MockRestApiService = class MockRestApiService {
                 dashboard: '',
                 options: {
                     setting1: false,
-                    setting2: true
-                }
+                    setting2: true,
+                },
             },
             {
                 id: 8,
@@ -96,8 +96,8 @@ let MockRestApiService = class MockRestApiService {
                 dashboard: 'https://example.com/dashboard/david',
                 options: {
                     setting1: true,
-                    setting2: false
-                }
+                    setting2: false,
+                },
             },
             {
                 id: 9,
@@ -107,8 +107,8 @@ let MockRestApiService = class MockRestApiService {
                 dashboard: '',
                 options: {
                     setting1: false,
-                    setting2: true
-                }
+                    setting2: true,
+                },
             },
             {
                 id: 10,
@@ -118,9 +118,9 @@ let MockRestApiService = class MockRestApiService {
                 dashboard: 'https://example.com/dashboard/kevin',
                 options: {
                     setting1: true,
-                    setting2: true
-                }
-            }
+                    setting2: true,
+                },
+            },
         ];
     }
     getDashboardLink(email) {

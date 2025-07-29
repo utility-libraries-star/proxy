@@ -13,53 +13,30 @@ import { RssParserModule } from './rss-parser/rss-parser.module';
 import { RssParserController } from './rss-parser/rss-parser.controller';
 import { RssParserService } from './rss-parser/rss-parser.service';
 import { ProxyModule } from './proxy/proxy.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Meta } from './meta/meta.entity';
-import { MetaController } from './meta/meta.controller';
-import { MetaService } from './meta/meta.service';
-import { ConfigModule } from '@nestjs/config';
+import { ProxyService } from './proxy/proxy.service';
+import { ProxyController } from './proxy/proxy.controller';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true
-    }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
-      serveRoot: '/static'
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.MYSQL_HOST,
-      port: +process.env.MYSQL_PORT,
-      username: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DB,
-      entities: [Meta],
-      synchronize: true,
-      ssl: {
-        rejectUnauthorized: false
-      }
-    }),
-    TypeOrmModule.forFeature([Meta]),
     WidgetModule,
     OpenGraphModule,
     RssParserModule,
-    ProxyModule
+    ProxyModule,
   ],
   controllers: [
-    MetaController,
     OpenGraphController,
     FormatController,
     MockRestApiController,
-    RssParserController
+    RssParserController,
   ],
   providers: [
-    MetaService,
     FormatService,
     MockRestApiService,
     OpenGraphService,
-    RssParserService
-  ]
+    RssParserService,
+  ],
 })
 export class AppModule {}

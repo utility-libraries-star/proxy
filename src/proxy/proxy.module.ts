@@ -8,11 +8,11 @@ import { HttpModule } from '@nestjs/axios';
   imports: [
     CacheModule.register({
       ttl: 60 * 60,
-      isGlobal: true
+      isGlobal: true,
     }),
-    HttpModule
+    HttpModule,
   ],
   controllers: [ProxyController],
-  providers: [ProxyService]
+  providers: [ProxyService],
 })
 export class ProxyModule {}

@@ -41,7 +41,7 @@ let ProxyService = ProxyService_1 = class ProxyService {
         const response = await (0, rxjs_1.lastValueFrom)(this.httpService.get(url, { responseType: 'text' }));
         const result = {
             data: response.data,
-            contentType: response.headers['content-type']
+            contentType: response.headers['content-type'],
         };
         await this.cacheManager.set(cacheKey, result, 3600);
         return result;

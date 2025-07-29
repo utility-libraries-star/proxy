@@ -16,7 +16,7 @@ exports.WidgetModule = WidgetModule;
 exports.WidgetModule = WidgetModule = __decorate([
     (0, common_1.Module)({
         controllers: [widget_controller_1.WidgetController],
-        providers: [widget_service_1.WidgetService]
+        providers: [widget_service_1.WidgetService],
     })
 ], WidgetModule);
 //# sourceMappingURL=widget.module.js.map

@@ -4,6 +4,6 @@ import { RssParserController } from './rss-parser.controller';
 
 @Module({
   controllers: [RssParserController],
-  providers: [RssParserService]
+  providers: [RssParserService],
 })
 export class RssParserModule {}

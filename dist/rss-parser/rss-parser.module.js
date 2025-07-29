@@ -16,7 +16,7 @@ exports.RssParserModule = RssParserModule;
 exports.RssParserModule = RssParserModule = __decorate([
     (0, common_1.Module)({
         controllers: [rss_parser_controller_1.RssParserController],
-        providers: [rss_parser_service_1.RssParserService]
+        providers: [rss_parser_service_1.RssParserService],
     })
 ], RssParserModule);
 //# sourceMappingURL=rss-parser.module.js.map

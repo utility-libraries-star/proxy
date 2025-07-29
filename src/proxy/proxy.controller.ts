@@ -10,7 +10,7 @@ export class ProxyController {
   async proxy(
     @Query('url') url: string,
     @Query('clear_cache') clearCache: string,
-    @Res() res: Response
+    @Res() res: Response,
   ) {
     if (!url) {
       return res.status(400).json({ error: 'Missing url parameter' });
@@ -19,7 +19,7 @@ export class ProxyController {
     try {
       const { data, contentType } = await this.proxyService.fetchWithCache(
         url,
-        clearCache === '1'
+        clearCache === '1',
       );
 
       console.log(data);

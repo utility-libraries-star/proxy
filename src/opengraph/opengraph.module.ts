@@ -7,10 +7,10 @@ import { OpenGraphController } from './opengraph.controller';
   imports: [
     CacheModule.register({
       ttl: 7200, // 2 часа
-      isGlobal: true
-    })
+      isGlobal: true,
+    }),
   ],
   controllers: [OpenGraphController],
-  providers: [OpenGraphService]
+  providers: [OpenGraphService],
 })
 export class OpenGraphModule {}

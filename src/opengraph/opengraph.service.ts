@@ -62,7 +62,7 @@ export class OpenGraphService {
 
   async fetchOgData(
     url: string,
-    clearCache = false
+    clearCache = false,
   ): Promise<Record<string, string>> {
     const cacheKey = `og:${url}`;
 
