@@ -25,7 +25,6 @@ const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
 const meta_service_1 = require("./meta/meta.service");
 const meta_controller_1 = require("./meta/meta.controller");
-const prisma_module_1 = require("./prisma/prisma.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -39,7 +38,6 @@ exports.AppModule = AppModule = __decorate([
                 rootPath: (0, path_1.join)(__dirname, '..', 'public'),
                 serveRoot: '/static',
             }),
-            prisma_module_1.PrismaModule,
             widget_module_1.WidgetModule,
             opengraph_module_1.OpenGraphModule,
             rss_parser_module_1.RssParserModule,
