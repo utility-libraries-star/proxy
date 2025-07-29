@@ -23,9 +23,6 @@ const proxy_module_1 = require("./proxy/proxy.module");
 const config_1 = require("@nestjs/config");
 const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
-const typeorm_1 = require("@nestjs/typeorm");
-const meta_entity_1 = require("./meta/meta.entity");
-const typeorm_2 = require("typeorm");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -39,30 +36,6 @@ exports.AppModule = AppModule = __decorate([
                 rootPath: (0, path_1.join)(__dirname, '..', 'public'),
                 serveRoot: '/static',
             }),
-            typeorm_1.TypeOrmModule.forRootAsync({
-                imports: [config_1.ConfigModule],
-                useFactory: async () => {
-                    const dataSource = new typeorm_2.DataSource({
-                        type: 'mysql',
-                        host: process.env.MYSQL_HOST,
-                        port: parseInt(process.env.MYSQL_PORT || '3306'),
-                        username: process.env.MYSQL_USER,
-                        password: process.env.MYSQL_PASSWORD,
-                        database: process.env.MYSQL_DB,
-                        entities: [meta_entity_1.Meta],
-                        synchronize: false,
-                        logging: true,
-                        ssl: {
-                            ca: process.env.CA_CERTIFICATE.replace(/\\n/g, '\n')
-                        },
-                        poolSize: 1,
-                        acquireTimeout: 10000
-                    });
-                    await dataSource.initialize();
-                    return dataSource.options;
-                }
-            }),
-            typeorm_1.TypeOrmModule.forFeature([meta_entity_1.Meta]),
             widget_module_1.WidgetModule,
             opengraph_module_1.OpenGraphModule,
             rss_parser_module_1.RssParserModule,

@@ -14,9 +14,6 @@ import {ProxyModule} from './proxy/proxy.module';
 import {ConfigModule} from "@nestjs/config";
 import {ServeStaticModule} from "@nestjs/serve-static";
 import {join} from "path";
-import {TypeOrmModule} from "@nestjs/typeorm";
-import {Meta} from "./meta/meta.entity";
-import {DataSource} from "typeorm";
 
 @Module({
     imports: [
@@ -27,30 +24,30 @@ import {DataSource} from "typeorm";
             rootPath: join(__dirname, '..', 'public'),
             serveRoot: '/static',
         }),
-        TypeOrmModule.forRootAsync({
-            imports: [ConfigModule],
-            useFactory: async () => {
-                const dataSource = new DataSource({
-                    type: 'mysql',
-                    host: process.env.MYSQL_HOST,
-                    port: parseInt(process.env.MYSQL_PORT || '3306'),
-                    username: process.env.MYSQL_USER,
-                    password: process.env.MYSQL_PASSWORD,
-                    database: process.env.MYSQL_DB,
-                    entities: [Meta],
-                    synchronize: false,
-                    logging: true,
-                    ssl: {
-                        ca: process.env.CA_CERTIFICATE.replace(/\\n/g, '\n')
-                    },
-                    poolSize: 1,
-                    acquireTimeout: 10000
-                })
-                await dataSource.initialize();
-                return dataSource.options;
-            }
-        }),
-        TypeOrmModule.forFeature([Meta]),
+        // TypeOrmModule.forRootAsync({
+        //     imports: [ConfigModule],
+        //     useFactory: async () => {
+        //         const dataSource = new DataSource({
+        //             type: 'mysql',
+        //             host: process.env.MYSQL_HOST,
+        //             port: parseInt(process.env.MYSQL_PORT || '3306'),
+        //             username: process.env.MYSQL_USER,
+        //             password: process.env.MYSQL_PASSWORD,
+        //             database: process.env.MYSQL_DB,
+        //             entities: [Meta],
+        //             synchronize: false,
+        //             logging: true,
+        //             ssl: {
+        //                 ca: process.env.CA_CERTIFICATE.replace(/\\n/g, '\n')
+        //             },
+        //             poolSize: 1,
+        //             acquireTimeout: 10000
+        //         })
+        //         await dataSource.initialize();
+        //         return dataSource.options;
+        //     }
+        // }),
+        // TypeOrmModule.forFeature([Meta]),
         WidgetModule,
         OpenGraphModule,
         RssParserModule,
