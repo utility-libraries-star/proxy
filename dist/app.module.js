@@ -38,17 +38,25 @@ exports.AppModule = AppModule = __decorate([
                 rootPath: (0, path_1.join)(__dirname, '..', 'public'),
                 serveRoot: '/static',
             }),
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'mysql',
-                host: process.env.MYSQL_HOST,
-                port: +process.env.MYSQL_PORT,
-                username: process.env.MYSQL_USER,
-                password: process.env.MYSQL_PASSWORD,
-                database: process.env.MYSQL_DB,
-                entities: [meta_entity_1.Meta],
-                synchronize: true,
-                ssl: {
-                    rejectUnauthorized: false,
+            typeorm_1.TypeOrmModule.forRootAsync({
+                useFactory: () => {
+                    if (!process.env.MYSQL_HOST) {
+                        console.log('Not Connected');
+                        return {
+                            type: 'mysql',
+                        };
+                    }
+                    return {
+                        type: 'mysql',
+                        host: process.env.MYSQL_HOST,
+                        port: +process.env.MYSQL_PORT,
+                        username: process.env.MYSQL_USER,
+                        password: process.env.MYSQL_PASSWORD,
+                        database: process.env.MYSQL_DB,
+                        entities: [meta_entity_1.Meta],
+                        synchronize: true,
+                        ssl: { rejectUnauthorized: false },
+                    };
                 },
             }),
             typeorm_1.TypeOrmModule.forFeature([meta_entity_1.Meta]),
