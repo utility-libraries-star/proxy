@@ -2,15 +2,18 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    // Отключаем логирование при старте для Vercel
-    logger: ['error', 'warn'],
-  });
+  try {
+    const app = await NestFactory.create(AppModule, {
+      logger: ['error', 'warn', 'log']
+    });
 
-  await app.listen(process.env.PORT || 3000);
-  return app.getHttpServer();
+    await app.listen(process.env.PORT || 3000);
+
+    return app.getHttpServer();
+  } catch (error) {
+    console.error('Application startup error:', error);
+    process.exit(1);
+  }
 }
 
-// Экспортируем промис, который разрешается в сервер
-const server = bootstrap();
-export default server;
+bootstrap()
