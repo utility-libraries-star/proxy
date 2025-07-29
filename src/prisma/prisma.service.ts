@@ -6,7 +6,7 @@ import { join } from 'path';
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   constructor() {
-    const certContent = process.env.SSL_CERT.replace(/\\n/g, '\n');
+    const certContent = process.env.SSL.replace(/\\n/g, '\n');
     if (certContent) {
       const certPath = join('/tmp', 'ca.pem');
       writeFileSync(certPath, certContent, 'utf-8');
