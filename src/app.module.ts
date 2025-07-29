@@ -16,7 +16,6 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MetaService } from './meta/meta.service';
 import { MetaController } from './meta/meta.controller';
-import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -27,7 +26,7 @@ import { PrismaModule } from './prisma/prisma.module';
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/static',
     }),
-    PrismaModule,
+    //PrismaModule,
     WidgetModule,
     OpenGraphModule,
     RssParserModule,
