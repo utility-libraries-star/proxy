@@ -20,12 +20,16 @@ const rss_parser_module_1 = require("./rss-parser/rss-parser.module");
 const rss_parser_controller_1 = require("./rss-parser/rss-parser.controller");
 const rss_parser_service_1 = require("./rss-parser/rss-parser.service");
 const proxy_module_1 = require("./proxy/proxy.module");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+            }),
             widget_module_1.WidgetModule,
             opengraph_module_1.OpenGraphModule,
             rss_parser_module_1.RssParserModule,

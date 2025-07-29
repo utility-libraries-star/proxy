@@ -11,12 +11,13 @@ import { RssParserModule } from './rss-parser/rss-parser.module';
 import { RssParserController } from './rss-parser/rss-parser.controller';
 import { RssParserService } from './rss-parser/rss-parser.service';
 import { ProxyModule } from './proxy/proxy.module';
+import {ConfigModule} from "@nestjs/config";
 
 @Module({
   imports: [
-    // ConfigModule.forRoot({
-    //   isGlobal: true,
-    // }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     // ServeStaticModule.forRoot({
     //   rootPath: join(__dirname, '..', 'public'),
     //   serveRoot: '/static',
