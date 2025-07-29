@@ -68,7 +68,7 @@ let RssParserService = class RssParserService {
             category: item.category,
             guid: normalize(item.guid),
             description: normalize(item.description),
-            'post-id': normalize(item['post-id'])
+            'post-id': normalize(item['post-id']),
         }));
         return {
             channel: {
