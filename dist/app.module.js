@@ -21,6 +21,8 @@ const rss_parser_controller_1 = require("./rss-parser/rss-parser.controller");
 const rss_parser_service_1 = require("./rss-parser/rss-parser.service");
 const proxy_module_1 = require("./proxy/proxy.module");
 const config_1 = require("@nestjs/config");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -29,6 +31,10 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
+            }),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', 'public'),
+                serveRoot: '/static',
             }),
             widget_module_1.WidgetModule,
             opengraph_module_1.OpenGraphModule,
