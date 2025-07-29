@@ -26,19 +26,24 @@ import {Meta} from "./meta/meta.entity";
             rootPath: join(__dirname, '..', 'public'),
             serveRoot: '/static',
         }),
-        TypeOrmModule.forRoot({
-            type: 'mysql',
-            host: process.env.MYSQL_HOST,
-            port: +process.env.MYSQL_PORT,
-            username: process.env.MYSQL_USER,
-            password: process.env.MYSQL_PASSWORD,
-            database: process.env.MYSQL_DB,
-            entities: [Meta],
-            synchronize: true,
-            ssl: {
-                ca: process.env.CA_CERTIFICATE?.replace(/\\n/g, '\n')
-            },
-            logging: ['error', 'query', 'warn'],
+        TypeOrmModule.forRootAsync({
+            useFactory: async () => ({
+                type: 'mysql',
+                host: process.env.MYSQL_HOST,
+                port: +process.env.MYSQL_PORT,
+                username: process.env.MYSQL_USER,
+                password: process.env.MYSQL_PASSWORD,
+                database: process.env.MYSQL_DB,
+                entities: [Meta],
+                synchronize: true,
+                ssl: {
+                    ca: process.env.CA_CERTIFICATE.replace(/\\n/g, '\n')
+                },
+                extra: {
+                    connectionLimit: 10,
+                    waitForConnections: true,
+                }
+            }),
         }),
         TypeOrmModule.forFeature([Meta]),
         WidgetModule,
