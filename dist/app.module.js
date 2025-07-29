@@ -22,8 +22,6 @@ const rss_parser_module_1 = require("./rss-parser/rss-parser.module");
 const rss_parser_controller_1 = require("./rss-parser/rss-parser.controller");
 const rss_parser_service_1 = require("./rss-parser/rss-parser.service");
 const proxy_module_1 = require("./proxy/proxy.module");
-const typeorm_1 = require("@nestjs/typeorm");
-const meta_entity_1 = require("./meta/meta.entity");
 const meta_controller_1 = require("./meta/meta.controller");
 const meta_service_1 = require("./meta/meta.service");
 const config_1 = require("@nestjs/config");
@@ -40,20 +38,6 @@ exports.AppModule = AppModule = __decorate([
                 rootPath: (0, path_1.join)(__dirname, '..', 'public'),
                 serveRoot: '/static',
             }),
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'mysql',
-                host: process.env.MYSQL_HOST,
-                port: +process.env.MYSQL_PORT,
-                username: process.env.MYSQL_USER,
-                password: process.env.MYSQL_PASSWORD,
-                database: process.env.MYSQL_DB,
-                entities: [meta_entity_1.Meta],
-                synchronize: true,
-                ssl: {
-                    rejectUnauthorized: false,
-                },
-            }),
-            typeorm_1.TypeOrmModule.forFeature([meta_entity_1.Meta]),
             widget_module_1.WidgetModule,
             opengraph_module_1.OpenGraphModule,
             rss_parser_module_1.RssParserModule,
