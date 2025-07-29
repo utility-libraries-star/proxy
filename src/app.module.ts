@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { join } from 'path';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { FormatController } from './format/format.controller';
 import { FormatService } from './format/format.service';
 import { MockRestApiController } from './mock-rest-api/mock-rest-api.controller';
@@ -13,21 +11,18 @@ import { RssParserModule } from './rss-parser/rss-parser.module';
 import { RssParserController } from './rss-parser/rss-parser.controller';
 import { RssParserService } from './rss-parser/rss-parser.service';
 import { ProxyModule } from './proxy/proxy.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Meta } from './meta/meta.entity';
 import { MetaController } from './meta/meta.controller';
 import { MetaService } from './meta/meta.service';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
-      serveRoot: '/static',
-    }),
+    // ConfigModule.forRoot({
+    //   isGlobal: true,
+    // }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'public'),
+    //   serveRoot: '/static',
+    // }),
     // TypeOrmModule.forRoot({
     //   type: 'mysql',
     //   host: process.env.MYSQL_HOST,

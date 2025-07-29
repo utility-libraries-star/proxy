@@ -8,8 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const path_1 = require("path");
-const serve_static_1 = require("@nestjs/serve-static");
 const format_controller_1 = require("./format/format.controller");
 const format_service_1 = require("./format/format.service");
 const mock_rest_api_controller_1 = require("./mock-rest-api/mock-rest-api.controller");
@@ -24,20 +22,12 @@ const rss_parser_service_1 = require("./rss-parser/rss-parser.service");
 const proxy_module_1 = require("./proxy/proxy.module");
 const meta_controller_1 = require("./meta/meta.controller");
 const meta_service_1 = require("./meta/meta.service");
-const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            config_1.ConfigModule.forRoot({
-                isGlobal: true,
-            }),
-            serve_static_1.ServeStaticModule.forRoot({
-                rootPath: (0, path_1.join)(__dirname, '..', 'public'),
-                serveRoot: '/static',
-            }),
             widget_module_1.WidgetModule,
             opengraph_module_1.OpenGraphModule,
             rss_parser_module_1.RssParserModule,
