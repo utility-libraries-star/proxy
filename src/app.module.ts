@@ -14,8 +14,6 @@ import { ProxyModule } from './proxy/proxy.module';
 import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { MetaService } from './meta/meta.service';
-import { MetaController } from './meta/meta.controller';
 
 @Module({
   imports: [
@@ -33,14 +31,14 @@ import { MetaController } from './meta/meta.controller';
     ProxyModule,
   ],
   controllers: [
-    MetaController,
+    //MetaController,
     OpenGraphController,
     FormatController,
     MockRestApiController,
     RssParserController,
   ],
   providers: [
-    MetaService,
+    //MetaService,
     FormatService,
     MockRestApiService,
     OpenGraphService,
