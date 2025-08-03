@@ -23,8 +23,6 @@ const proxy_module_1 = require("./proxy/proxy.module");
 const config_1 = require("@nestjs/config");
 const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
-const meta_service_1 = require("./meta/meta.service");
-const meta_controller_1 = require("./meta/meta.controller");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -44,14 +42,12 @@ exports.AppModule = AppModule = __decorate([
             proxy_module_1.ProxyModule,
         ],
         controllers: [
-            meta_controller_1.MetaController,
             opengraph_controller_1.OpenGraphController,
             format_controller_1.FormatController,
             mock_rest_api_controller_1.MockRestApiController,
             rss_parser_controller_1.RssParserController,
         ],
         providers: [
-            meta_service_1.MetaService,
             format_service_1.FormatService,
             mock_rest_api_service_1.MockRestApiService,
             opengraph_service_1.OpenGraphService,
